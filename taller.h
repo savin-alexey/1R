@@ -262,11 +262,6 @@ char* taller(double cost)
         kopecks_out_postiton = 0;
     }
 
-
-
-
-
-
     strncat(ruble_out, ruble[ruble_out_position],14);
     strncat(ruble_out, " ",2);
     strncat(ruble_out, kopeck_out,256);
@@ -274,7 +269,5 @@ char* taller(double cost)
 
     return ruble_out;
 }
-
-
 
 #endif // TALLER_H

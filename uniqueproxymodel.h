@@ -10,22 +10,22 @@ class UniqueProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
-public:
-    explicit UniqueProxyModel(int column, QObject *parent=0)
-        : QSortFilterProxyModel(parent), Column(column) {}
+    public:
+        explicit UniqueProxyModel(int column, QObject *parent=0) : QSortFilterProxyModel(parent), Column(column) {}
+        void setSourceModel(QAbstractItemModel *sourceModel);
 
-    void setSourceModel(QAbstractItemModel *sourceModel);
+    protected:
 
-protected:
-    bool filterAcceptsRow(int sourceRow,
-                          const QModelIndex &sourceParent) const;
+        bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
 
-private slots:
-    void clearCache() { cache.clear(); }
+    private slots:
 
-private:
-    const int Column;
-    mutable QSet<QString> cache;
+        void clearCache() { cache.clear(); }
+
+    private:
+
+        const int Column;
+        mutable QSet<QString> cache;
 };
 
 #endif // UNIQUEPROXYMODEL_H

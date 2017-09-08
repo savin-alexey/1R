@@ -21,6 +21,7 @@ struct Hand
     QString warranty;
     QString deadline;
 };
+
 struct Contragent
 {
     QString name;
@@ -35,53 +36,52 @@ struct Contragent
     QString dogovor;
     QString dogovor_date;
 };
+
 struct Act
 {
     int number;
     QDate date;
 };
+
 struct Tn
 {
     int number;
     QDate date;
     QString person;
 };
+
 class StandardTableModel : public QStandardItemModel
 {
     Q_OBJECT
 
-public:
-    explicit StandardTableModel(QObject *parent=0, int button=0);
+    public:
 
-    QString filename() const { return m_filename; }
-    void clear();
-    void load(const QString &filename=QString());
-    void save(const QString &filename=QString());
-    int get_max_price();
-    int get_min_price();
-    QDate get_min_date(){return min_date;}
-    QDate get_max_date(){return max_date;}
+        explicit StandardTableModel(QObject *parent=0, int button=0);
 
-    //модель хранения услуг для отображения
-    QMap<int,QStandardItemModel*> pricemodel;
-    QMap<int,Hand> hand;
-    QMap<int,Contragent> contragent;
-    QMap<int,Act> act;
-    QMap<int,Tn> tn;
+        QString filename() const { return m_filename; }
+        void clear();
+        void load(const QString &filename=QString());
+        void save(const QString &filename=QString());
+        int get_max_price();
+        int get_min_price();
+        QDate get_min_date(){return min_date;}
+        QDate get_max_date(){return max_date;}
 
-private:
+        //модель хранения услуг для отображения
+        QMap<int,QStandardItemModel*> pricemodel;
+        QMap<int,Hand> hand;
+        QMap<int,Contragent> contragent;
+        QMap<int,Act> act;
+        QMap<int,Tn> tn;
 
-    int button_model;
-    void initialize();
-    float max_price_model = -1;
-    float min_price_model = -1;
-    QString m_filename;
-    QDate min_date;
-    QDate max_date;
+    private:
 
-
+        int button_model;
+        void initialize();
+        float max_price_model = -1;
+        float min_price_model = -1;
+        QString m_filename;
+        QDate min_date;
+        QDate max_date;
 };
-
-
-
 #endif // STANDARDTABLEMODEL_H

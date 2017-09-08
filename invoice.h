@@ -4,7 +4,6 @@
 #include <QtWidgets>
 #include <QStyledItemDelegate>
 
-
 class Settings;
 class KontragentsTableModel;
 class StandardTreeModel;
@@ -13,98 +12,99 @@ class DoubleSpinBoxDelegate;
 
 class InvoiceDialog : public QDialog
 {
-Q_OBJECT
-public:
-    InvoiceDialog();
-    void set_currency(double current_currency) { currency = current_currency; }
-    void new_check(Settings *setting, KontragentsTableModel *kontragents, StandardTreeModel *prices);
-private:
-    double currency;
-    QSpinBox *e_number;
-    QDateEdit *e_date;
-    QComboBox *c_customer;
+    Q_OBJECT
 
-    QLabel *l_header[7];
-    QLabel *l_customer[7];
+    public:
 
-    QLineEdit *e_name;
-    QLineEdit *e_post;
+        InvoiceDialog();
+        void set_currency(double current_currency) { currency = current_currency; }
+        void new_check(Settings *setting, KontragentsTableModel *kontragents, StandardTreeModel *prices);
 
-    QLineEdit *e_c_number;
-    QDateEdit *e_c_date;
+    private:
 
-    QLineEdit *e_vac;
-    QLineEdit *e_tax;
+        double currency;
+        QSpinBox *e_number;
+        QDateEdit *e_date;
+        QComboBox *c_customer;
 
-    QTableView *out_table_view;
-    QTableView *group_tab_view;
+        QLabel *l_header[7];
+        QLabel *l_customer[7];
 
-    QLineEdit *e_target;
-    QLineEdit *e_order;
-    QLineEdit *e_warranty;
-    QLineEdit *e_deadline;
+        QLineEdit *e_name;
+        QLineEdit *e_post;
 
-    QLineEdit *e_new_price;
-    QLineEdit *e_new_service;
+        QLineEdit *e_c_number;
+        QDateEdit *e_c_date;
 
-    QPushButton *pb_add_new_service;
+        QLineEdit *e_vac;
+        QLineEdit *e_tax;
 
-    QLineEdit *regEx;
+        QTableView *out_table_view;
+        QTableView *group_tab_view;
 
-    QLabel *l_propis;
-    QLabel *l_out_price;
+        QLineEdit *e_target;
+        QLineEdit *e_order;
+        QLineEdit *e_warranty;
+        QLineEdit *e_deadline;
 
-    QPushButton *pb_save;
-    QPushButton *pb_cancel;
-    QPushButton *pb_print;
-    QPushButton *pb_save_pdf;
+        QLineEdit *e_new_price;
+        QLineEdit *e_new_service;
+    
+        QPushButton *pb_add_new_service;
 
-    QComboBox *s_target;
-    QComboBox *s_order;
-    QComboBox *s_warranty;
-    QComboBox *s_deadline;
+        QLineEdit *regEx;
 
-    QGroupBox *g_contract;
+        QLabel *l_propis;
+        QLabel *l_out_price;
 
-    void clear();
+        QPushButton *pb_save;
+        QPushButton *pb_cancel;
+        QPushButton *pb_print;
+        QPushButton *pb_save_pdf;
 
-    QStringList person_name;
-    QStringList person_post;
-    QComboBox *s_person;
-    QComboBox *s_group;
-    QSortFilterProxyModel *group_proxy_model;
+        QComboBox *s_target;
+        QComboBox *s_order;
+        QComboBox *s_warranty;
+        QComboBox *s_deadline;
 
-    QStandardItemModel *services_model;
-    SpinBoxDelegate *intDelegate;
-    DoubleSpinBoxDelegate *doubleDelegate;
-
-    void recalculate();
-    void recalculate_propis();
+        QGroupBox *g_contract;
 
 
-private slots:
-    void set_kontragents(QStringList data);
-    void set_persons(int row);
-    void take_group_model(QStandardItemModel *group_model);
-    void filterRegExpChanged();
-    void new_service_edited();
-    void add_new_service();
-    void add_service_from_group(QModelIndex current_index);
-    void save_edit_data_in_out_tab(QModelIndex current_index);
+        QStringList person_name;
+        QStringList person_post;
+        QComboBox *s_person;
+        QComboBox *s_group;
+        QSortFilterProxyModel *group_proxy_model;
 
-    void delete_out_row();
+        QStandardItemModel *services_model;
+        SpinBoxDelegate *intDelegate;
+        DoubleSpinBoxDelegate *doubleDelegate;
 
-    void pb_save_clicked();
+        void clear();
+        void recalculate();
+        void recalculate_propis();
 
+    private slots:
 
+        void set_kontragents(QStringList data);
+        void set_persons(int row);
+        void take_group_model(QStandardItemModel *group_model);
+        void filterRegExpChanged();
+        void new_service_edited();
+        void add_new_service();
+        void add_service_from_group(QModelIndex current_index);
+        void save_edit_data_in_out_tab(QModelIndex current_index);
+        void delete_out_row();
+        void pb_save_clicked();
 
-signals:
-    void send_kontragent_row(int row);
-    void send_preiskurant_group(int row);
-    void send_new_service(int row, QStringList new_data);
-    void find_new_text(int row, QString new_text);
-    void send_last_number(int number);
-    void send_new_person(int row, QString name, QString post);
+    signals:
+
+        void send_kontragent_row(int row);
+        void send_preiskurant_group(int row);
+        void send_new_service(int row, QStringList new_data);
+        void find_new_text(int row, QString new_text);
+        void send_last_number(int number);
+        void send_new_person(int row, QString name, QString post);
 };
 
 #endif // INVOICE_H
